@@ -29,10 +29,7 @@ turbidez = st.sidebar.slider("Turbidez (NTU)", 0, 3500, 1000, 50)
 co2 = st.sidebar.slider("Gás CO2 (ppm)", 300, 1200, 1000, 10)
 
 # ==========================================
-# CÁLCULO DIRETO (SEM BOTÃO!)
-# Assim que arrastar um slider, as barras do gráfico dançam.
-# Estas fórmulas provisórias foram ajustadas para reagirem muito mais aos sliders.
-# (No futuro, você substituirá isto pelo seu modelo Keras: model.predict([dia, ph, temp...]))
+# CÁLCULO DIRETO
 # ==========================================
 dqo_saida = max(50.0, DQO_INICIAL - (dia * 1300) + (turbidez * 1.5) - (temp * 15))
 p_saida = max(0.1, P_INICIAL - (dia * 40) - (ph * 5) + (temp * 1.5))
@@ -87,7 +84,7 @@ st.divider()
 
 # --- GRÁFICO DE BARRAS DINÂMICO ---
 st.subheader("Visualização dos Nutrientes Restantes")
-# Adicionámos o DQO ao gráfico e usámos a vista nativa do Streamlit que ajusta melhor as escalas
+# Adicionámos o DQO ao gráfico 
 dados_grafico = pd.DataFrame({
     "Concentração (mg/L)": [dqo_saida, p_saida, n_saida, s_saida]
 }, index=["DQO", "Fósforo", "Nitrogénio", "Enxofre"])
